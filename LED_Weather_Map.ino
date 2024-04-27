@@ -3,13 +3,9 @@
 #include <WiFiClientSecure.h>
 #include <FastLED_NeoPixel.h>
 #include "airports50.h"
-//#include "dummydata.h"
-
-//using namespace std;
-
 
 String response="";
-int DEBUG = 4; //Debug levels: 0-None, 1-Wx and LED color, 2-Incl WiFi connectivity, 3- Incl API call response, 4-Verbose;
+int DEBUG = 1; //Debug levels: 0-None, 1-Wx and LED color, 2-Incl WiFi connectivity, 3- Incl API call response, 4-Verbose;
 unsigned long retryClock; 
 unsigned long lastCall; 
 String windDirection = "";
@@ -21,14 +17,13 @@ String color = "";
  // Which pin on the Arduino is connected to the LEDs?
 #define DATA_PIN 14
 // LED brightness, 0 (min) to 255 (max)
-#define BRIGHTNESS 10
+#define BRIGHTNESS 20 //20 or 30 is good. 255 is right out
 
 #define WIND_LIMIT 20 // Sets the maximimum wind to show VFR airport as green, else it will show yellow
 #define RETRY_SPEED 50000 //Sets the minimum time between successive calls to the aviation weather API. 1000 is one second
 
 //FastLED_NeoPixel<NUM_AIRPORTS, DATA_PIN, NEO_GRB> strip;      // <- FastLED NeoPixel version
 Adafruit_NeoPixel strip(NUM_AIRPORTS, DATA_PIN, NEO_GRB);  // <- Adafruit NeoPixel version
-
 
 // API
 const char* host = "aviationweather.gov";
